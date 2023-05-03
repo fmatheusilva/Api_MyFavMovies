@@ -1,7 +1,13 @@
+using Api_MyFavMovies.Persistence;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.AddDbContext<UserDbContext>(o => o.)]
+var connectionString = builder.Configuration.GetConnectionString("MyFavMoviesCs");
 
+builder.Services.AddDbContext<MyFavMoviesDbContext>(o => o.UseSqlServer(connectionString));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
